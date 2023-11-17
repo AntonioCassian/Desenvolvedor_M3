@@ -1,0 +1,39 @@
+.filter {
+    width: 160px;
+}
+
+.check-fiel {
+    display: flex;
+    align-items: center;
+
+    input {
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        margin-right: 10px;
+        cursor: pointer;
+        border: 1px solid var(--gray-100);
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+}
+
+.check-fiel {
+    input:before {
+        content: '';
+        position: absolute;
+        height: 10px;
+        width: 10px;
+        background: var(--blue);
+        opacity: 0;
+    }
+}
+
+.check-fiel {
+    input:checked:before {
+        opacity: 1;
+    }
+}
