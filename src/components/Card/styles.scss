@@ -1,0 +1,50 @@
+.card {
+    width: 195px;
+    text-align: center;
+
+    .card-img {
+        height: 293px;
+
+        img {
+            height: 100%;
+        }
+    }
+
+    .description {
+        .name {
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            margin: 10px 0;
+        }
+
+        .valor {
+            margin-bottom: 14px;
+            .value {
+                font-size: 16px;
+                font-weight: 700;
+                text-align: center;
+                margin: 10px 0;
+            }
+
+            .parcela {
+                font-size: 16px;
+                font-weight: 400;
+                color: var(--gray-200);
+            }
+        }
+
+    }
+
+    .btn {
+        padding: 7px 49px;
+        font-size: 14px;
+        text-transform: uppercase;
+        background-color: #000;
+        color: #fff;
+        font-weight: 700;
+        border: none;
+        width: 195px;
+        margin-bottom: 2px;
+    }
+}

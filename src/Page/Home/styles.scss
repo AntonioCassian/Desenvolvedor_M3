@@ -1,0 +1,10 @@
+.home-div {
+    display: flex;
+
+    main {
+        padding: 48px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 64px;
+    }
+}

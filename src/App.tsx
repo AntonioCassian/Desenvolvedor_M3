@@ -1,13 +1,10 @@
-import { Filter } from './components/Filter'
-import { Header } from './components/Header'
-
+import { Home } from './Page/Home'
 import './styles/global.scss'
 
 function App() {
   return (
     <>
-      <Header />
-      <Filter />
+      <Home />
     </>
   )
 }
