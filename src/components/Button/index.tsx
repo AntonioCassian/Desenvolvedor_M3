@@ -1,7 +1,10 @@
 import './styles.scss'
-
-export const Button = () => {
+type Props = {
+    text: string;
+    onClick: () => void;
+}
+export const Button = ({text, onClick}: Props) => {
     return (
-        <button className="btn">Carregar Mais</button>
+        <button className="btn" onClick={onClick}>{text}</button>
     )
 }
