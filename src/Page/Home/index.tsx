@@ -3,6 +3,7 @@ import { Card } from "../../components/Card"
 import { Filter } from "../../components/Filter"
 import { Header } from "../../components/Header"
 import { Order } from '../../components/Order'
+import { Button } from '../../components/Button'
 
 export const Home = () => {
     return (
@@ -15,12 +16,10 @@ export const Home = () => {
                         <Filter />
                     </aside>
                     <main>
-                        <Card />
-                        <Card />
-                        <Card />
-                        <Card />
-                        <Card />
-                        <Card />
+                        <div className='main-container' >
+                            <Card />
+                        </div>
+                        <Button />
                     </main>
                 </div>
             </div>

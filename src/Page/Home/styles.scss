@@ -2,9 +2,12 @@
     display: flex;
 
     main {
-        padding: 0 48px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 64px;
+        text-align: center;
+        .main-container {
+            padding: 0 48px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 64px;
+        }
     }
 }
