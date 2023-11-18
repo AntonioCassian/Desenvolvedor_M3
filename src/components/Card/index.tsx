@@ -1,7 +1,13 @@
+import { useState } from 'react';
 import './styles.scss';
 import Camisa from '../../assets/img/img_2.png'
 
 export const Card = () => {
+    const [produtos, setProdutos] = useState([])
+
+    fetch('http://localhost:3000/products', {
+        method
+    })
     return (
         <div className="card">
             <div className="card-img">
