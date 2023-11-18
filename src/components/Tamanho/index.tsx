@@ -4,9 +4,10 @@ const Tam = [
     { 'id': 2, 'sel': 'M' },
     { 'id': 3, 'sel': 'G' },
     { 'id': 4, 'sel': 'GG' },
-    { 'id': 5, 'sel': 36 },
-    { 'id': 6, 'sel': 38 },
-    { 'id': 7, 'sel': 40 },
+    { 'id': 5, 'sel': 'U' },
+    { 'id': 6, 'sel': 36 },
+    { 'id': 7, 'sel': 38 },
+    { 'id': 8, 'sel': 40 },
 ]
 export const Tamanho = () => {
     return (

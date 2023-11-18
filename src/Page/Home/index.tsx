@@ -5,6 +5,7 @@ import { Filter } from "../../components/Filter"
 import { Header } from "../../components/Header"
 import { Order } from '../../components/Order'
 import { Button } from '../../components/Button'
+import { Footer } from '../../components/Footer';
 
 export const Home = () => {
     const [visible, setVisible] = useState(9)
@@ -38,6 +39,7 @@ export const Home = () => {
                     </main>
                 </div>
             </div>
+            <Footer />
         </>
     )
 }
