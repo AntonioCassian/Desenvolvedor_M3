@@ -1,28 +1,45 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+import { api } from '../../provider/api';
+import { Product } from '../../provider/Product';
+
 import './styles.scss';
-import Camisa from '../../assets/img/img_2.png'
 
 export const Card = () => {
-    const [produtos, setProdutos] = useState([])
+    const [produtos, setProdutos] = useState<Product []>([])
 
-    fetch('http://localhost:3000/products', {
-        method
-    })
+    const getData = async () => {
+         await api.get('/products')
+            .then((response) => {
+                setProdutos(response.data)
+            })
+            .catch((err) => {
+                alert(err)
+            })
+    }
+    useEffect(() => {
+       getData();
+    }, []);
     return (
-        <div className="card">
-            <div className="card-img">
-                <img src={Camisa} />
-            </div>
-            <div className="description">
-                <p className="name">Camiseta Mescla</p>
+        <>
+        {produtos.map((data) => (
 
-                <div className="valor">
-                    <p className="value">R$ 28,00</p>
-                    <span className="parcela">até 3x de R$9,33</span>
-                </div>
-            </div>
-            <button className="btn">comprar</button>
-        </div>
+        <div className="card" key={data.id}>
+                        <div className="card-img">
+                            <img src={data.image} />
+                        </div>
+                        <div className="description">
+                                <p className="name">{data.name}</p>
+
+                                <div className="valor">
+                                    <p className="value">R$ {data.price}</p>
+                                    <span className="parcela">até {data.parcelamento[0]} de R${data.parcelamento[1]}</span>
+                                </div>
+                        </div>
+                        <button className="btn">comprar</button>
+        </div >
+        ))}
+        </>
 
     );
 }
