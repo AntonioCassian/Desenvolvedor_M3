@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 
 export function Header() {
     return (
-        <header>
+        <header className='header'>
             <div className='container-nav'>
                 <img src={Logo} alt="Desenvolvedor-M3" />
 
