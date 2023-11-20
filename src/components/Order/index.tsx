@@ -1,7 +1,14 @@
-import React, { useState} from 'react';
+import { useState} from 'react';
 import { Icon } from '@iconify/react';
 import "./styles.scss"
-export const Order = () => {
+import { Product } from '../../provider/Product';
+
+type Props = {
+    recent?: () => void;
+    precomenor?: () => void;
+    precomaior?: () => void;
+}
+export const Order = ({recent, precomenor, precomaior}: Props) => {
     const [open, setOpen] = useState(false);
 
     return (
@@ -17,9 +24,9 @@ export const Order = () => {
                 {open && (
                     <div className="content">
                         <ul className="options">
-                            <li className="opt">Mais recentes</li>
-                            <li className="opt">Menor preço</li>
-                            <li className="opt">Maior preço</li>
+                            <li className="opt" onClick={recent}>Mais recentes</li>
+                            <li className="opt" onClick={precomenor}>Menor preço</li>
+                            <li className="opt" onClick={precomaior}>Maior preço</li>
                         </ul>
                     </div>
                 )}

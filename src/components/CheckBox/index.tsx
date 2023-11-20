@@ -1,23 +1,27 @@
 import './styles.scss'
-import { Icon } from '@iconify/react';
 
+type Props = {
+    label?: string;
+    value?: string;
+    select?: boolean;
+    name: string;
+    onChange: React.ChangeEventHandler<HTMLInputElement>;
+}
 
-
-import { cores } from '../Filter';
-
-
-export const Checkbox = () => {
+export const Checkbox= ({select, onChange, label, value, name} :Props)  => {
     return (
         <>
-            {cores.map((cor) => (
-                <div className='check-fiel' key={cor.id}>
-                    <input id='chec' type="checkbox" />
-                    <label htmlFor="chec">{cor.color}</label>
+                <div className='check-fiel' >
+                    <input 
+                    value={value}
+                    name={name}
+                    checked={select}
+                    onChange={onChange}
+                    id='chec' type="checkbox" />
+                    <label htmlFor="chec">{label}</label>
                 </div>
-            ))}
-            <div className='btn-filt'>
-                <span>Ver todas as cores</span><Icon icon="prime:angle-down" className='ibtn' />
-            </div>
+           
+            
         </>
     )
 }

@@ -1,0 +1,17 @@
+.btn-filt {
+    display: flex;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+    span {
+        font-size: 12px;
+        text-decoration: underline;
+        color: var(--gray-200);
+
+        .ibtn{
+            color: var(--gray-200);
+            font-size: 12px;
+            margin-top: 10px;
+        }
+    }
+}
