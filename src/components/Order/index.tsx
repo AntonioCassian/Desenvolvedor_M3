@@ -1,7 +1,6 @@
 import { useState} from 'react';
 import { Icon } from '@iconify/react';
 import "./styles.scss"
-import { Product } from '../../provider/Product';
 
 type Props = {
     recent?: () => void;
