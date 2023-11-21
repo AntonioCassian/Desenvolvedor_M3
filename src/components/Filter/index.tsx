@@ -31,8 +31,6 @@ export const preco = [
 ]
 
 export const Filter = () => {
-    
-
     return (
         <div className='filter'>
             <Cores />

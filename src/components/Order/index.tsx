@@ -1,18 +1,18 @@
 import { useState} from 'react';
 import { Icon } from '@iconify/react';
-import "./styles.scss"
 
+import "./styles.scss"
 type Props = {
     recent?: () => void;
     precomenor?: () => void;
     precomaior?: () => void;
 }
 export const Order = ({recent, precomenor, precomaior}: Props) => {
-    const [open, setOpen] = useState(false);
-
+    const [ open, setOpen ] = useState(false)
     return (
         <div className="tit-order">
             <div className="tit">Blusas</div>
+            
             <div className="order">
                 <div 
                 onClick={() => setOpen(!open)}
@@ -30,6 +30,7 @@ export const Order = ({recent, precomenor, precomaior}: Props) => {
                     </div>
                 )}
             </div>
+            
         </div>
     )
 }

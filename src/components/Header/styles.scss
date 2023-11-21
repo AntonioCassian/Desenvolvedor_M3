@@ -1,3 +1,4 @@
+@import '../../styles/global.scss';
 .header {
     padding: 16px 0;
     border-bottom: 2px solid #c7c7c7;
@@ -7,6 +8,10 @@
         flex-direction: row;
         justify-content: space-between;
         margin: auto 162px;
+
+        @include mobile {
+            margin: auto 27px;
+        }
     }
 
     img {

@@ -8,9 +8,11 @@ import { Button } from '../../components/Button'
 import { Footer } from '../../components/Footer';
 import { Product } from '../../provider/Product';
 import { api } from '../../provider/api';
+import { Modal } from '../../components/Modal';
 
 export const Home = () => {
     const [visible, setVisible] = useState(9)
+    const [modal, setModal] = useState(false);
     const [produtos, setProdutos] = useState<Product[]>([])
     const carregaMais = () => {
         setVisible(visible + 3)
@@ -19,15 +21,18 @@ export const Home = () => {
         setVisible(9)
     }
 
-    const handleRecent = () => {
+    const handleRecent = ( ) => {
         const NewProd = [...produtos]
         NewProd.sort((a, b) => {
             return new Date(b.date) - new Date(a.date);
         }
         );
         setProdutos(NewProd);
+        if(NewProd) setModal(false)
+        
+        
     }
-    
+
     const handleMenorPreco = () => {
         const NewProd = [...produtos]
         NewProd.sort((a, b) => {
@@ -35,6 +40,8 @@ export const Home = () => {
         }
         );
         setProdutos(NewProd);
+        if(NewProd) setModal(false)
+        
     }
 
     const handleMaiorPreco = () => {
@@ -44,6 +51,7 @@ export const Home = () => {
         }
         );
         setProdutos(NewProd);
+        if(NewProd) setModal(false)
     }
 
 
@@ -63,11 +71,22 @@ export const Home = () => {
         <>
             <Header />
             <div className="container">
-                <Order 
-                recent={handleRecent} 
-                precomenor={handleMenorPreco}
-                precomaior={handleMaiorPreco}
+                {modal && 
+                <Modal 
+                    recent={handleRecent}
+                    precomenor={handleMenorPreco}
+                    precomaior={handleMaiorPreco} />
+                }
+                <Order
+                    recent={handleRecent}
+                    precomenor={handleMenorPreco}
+                    precomaior={handleMaiorPreco}
                 />
+                <div className='fit-cont'>
+                    <div className='ft-ct'>Filtrar</div>
+                    <div className="vrt"></div>
+                    <div className='ft-ct' onClick={() => setModal(!modal)}>Ordenar</div>
+                </div>
                 <div className="home-div">
                     <aside>
                         <Filter />
