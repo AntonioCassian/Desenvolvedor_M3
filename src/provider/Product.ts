@@ -1,4 +1,6 @@
 export interface Product {
+    includes(sizFiltrated: Product): import("react").SetStateAction<Product[]>;
+    some: any;
     id: string;
     name: string;
     price: number;

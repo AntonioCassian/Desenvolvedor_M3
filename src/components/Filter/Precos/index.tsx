@@ -6,8 +6,8 @@ export const Precos = () => {
     const [select, setSelect] = useState(false)
     return (
         <Checkbox
-            label='Vinho'
-            select={select}
+            label='de R$0 até R$150'
+            
             onChange={(event) => setSelect(event.target.checked)}
         />
     )

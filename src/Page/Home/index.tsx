@@ -10,12 +10,14 @@ import { Product } from '../../provider/Product';
 import { api } from '../../provider/api';
 import { Modal } from '../../components/Modal';
 import { Cores } from '../../components/Filter/Cores';
+import { Tamanho } from '../../components/Filter/Tamanho';
 
 
 export const Home = () => {
     const [visible, setVisible] = useState(9)
     const [modal, setModal] = useState(false);
     const [produtos, setProdutos] = useState<Product[]>([])
+    const [filt, setFilt] = useState<Product[]>([])
     const carregaMais = () => {
         setVisible(visible + 3)
     }
@@ -23,16 +25,16 @@ export const Home = () => {
         setVisible(9)
     }
 
-    const handleRecent = ( ) => {
+    const handleRecent = () => {
         const NewProd = [...produtos]
         NewProd.sort((a, b) => {
             return new Date(b.date) - new Date(a.date);
         }
         );
         setProdutos(NewProd);
-        if(NewProd) setModal(false)
-        
-        
+        if (NewProd) setModal(false)
+
+
     }
 
     const handleMenorPreco = () => {
@@ -42,8 +44,8 @@ export const Home = () => {
         }
         );
         setProdutos(NewProd);
-        if(NewProd) setModal(false)
-        
+        if (NewProd) setModal(false)
+
     }
 
     const handleMaiorPreco = () => {
@@ -53,16 +55,16 @@ export const Home = () => {
         }
         );
         setProdutos(NewProd);
-        if(NewProd) setModal(false)
+        if (NewProd) setModal(false)
     }
 
-    
+
 
     const getData = async () => {
         await api.get(`/products`)
             .then((response) => {
                 setProdutos(response.data)
-                
+                setFilt(response.data)
             })
             .catch((err) => {
                 alert(err)
@@ -72,20 +74,26 @@ export const Home = () => {
         getData();
     }, []);
 
-   //Filtrando pela cor 
+    //Filtrando pela cor 
     const handleFilter = (corFiltrated: Product[]) => {
-        setProdutos(corFiltrated)
+        setFilt(corFiltrated)
     }
-    
+
+    //Filtrando pelo tamanho
+    const handleSiz = (sizFiltrated: Product[], corFiltrated: Product[]) => {
+
+        console.log(filt)
+    }
+
     return (
         <>
             <Header />
             <div className="container">
-                {modal && 
-                <Modal 
-                    recent={handleRecent}
-                    precomenor={handleMenorPreco}
-                    precomaior={handleMaiorPreco} />
+                {modal &&
+                    <Modal
+                        recent={handleRecent}
+                        precomenor={handleMenorPreco}
+                        precomaior={handleMaiorPreco} />
                 }
                 <Order
                     recent={handleRecent}
@@ -100,25 +108,46 @@ export const Home = () => {
                 <div className="home-div">
                     <aside>
                         <Cores onCorFilter={handleFilter} />
+                        <Tamanho onSizeFilter={handleSiz} />
                     </aside>
                     <main>
                         <section className='main-container'>
-                            {produtos.slice(0, visible).map((data) => (
-                                <div className="card" key={data.id}>
-                                    <div className="card-img">
-                                        <img src={data.image} />
-                                    </div>
-                                    <div className="description">
-                                        <p className="name">{data.name}</p>
-
-                                        <div className="valor">
-                                            <p className="value">R$ {data.price}</p>
-                                            <span className="parcela">até {data.parcelamento[0]} de R${data.parcelamento[1]}</span>
+                            {filt ?
+                                (produtos.slice(0, visible).map((data) => (
+                                    <div className="card" key={data.id}>
+                                        <div className="card-img">
+                                            <img src={data.image} />
                                         </div>
-                                    </div>
-                                    <button className="btn">comprar</button>
-                                </div >
-                            ))}
+                                        <div className="description">
+                                            <p className="name">{data.name}</p>
+
+                                            <div className="valor">
+                                                <p className="value">R$ {data.price}</p>
+                                                <span className="parcela">até {data.parcelamento[0]} de R${data.parcelamento[1]}</span>
+                                            </div>
+                                        </div>
+                                        <button className="btn">comprar</button>
+                                    </div >
+                                ))) :
+
+                                (filt.map((data) => (
+                                    <div className="card" key={data.id}>
+                                        <div className="card-img">
+                                            <img src={data.image} />
+                                        </div>
+                                        <div className="description">
+                                            <p className="name">{data.name}</p>
+
+                                            <div className="valor">
+                                                <p className="value">R$ {data.price}</p>
+                                                <span className="parcela">até {data.parcelamento[0]} de R${data.parcelamento[1]}</span>
+                                            </div>
+                                        </div>
+                                        <button className="btn">comprar</button>
+
+                                    </div >
+                                )))
+                            }
                         </section >
                         <div className='main-btn'>
                             {visible < 14 ? (
