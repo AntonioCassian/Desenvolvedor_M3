@@ -2,20 +2,20 @@ import './styles.scss'
 
 type Props = {
     label?: string;
-    value?: string;
-    select?: boolean;
+    value: string;
+    checked?: boolean;
     name: string;
-    onChange: React.ChangeEventHandler<HTMLInputElement>;
+    onChange: (event: any) => void;
 }
 
-export const Checkbox= ({select, onChange, label, value, name} :Props)  => {
+export const Checkbox= ({checked, onChange, label, value, name} :Props)  => {
     return (
         <>
                 <div className='check-fiel' >
                     <input 
                     value={value}
                     name={name}
-                    checked={select}
+                    checked={checked}
                     onChange={onChange}
                     id='chec' type="checkbox" />
                     <label htmlFor="chec">{label}</label>

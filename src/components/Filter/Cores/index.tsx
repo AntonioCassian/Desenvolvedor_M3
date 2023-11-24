@@ -1,112 +1,164 @@
-import { useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react'
 import { Checkbox } from '../../CheckBox'
 import { Title } from '../../Title'
 import { Icon } from '@iconify/react';
 import './styles.scss'
 import { Product } from '../../../provider/Product';
 
-export const Cores = () => {
-    const [corSelec, setCorSelec] = useState<Product[]>([])
-    const [check, setChek] = useState(null)
-    //const filterItem = products.filter(data => data.color)
 
+export const Cores = ({onCorFilter} : any) => {
+    const [visb, setVisb] = useState(false)
+    const [corFiltrated, setCorFiltrated] = useState<Product[]>([])
+    const [select, setSelect] = useState<{ [key: string]: boolean }>({
+        Amarelo: false,
+        Azul: false,
+        Branco: false,
+        Cinza: false,
+        Laranja: false,
+        Verde: false,
+        Vermelho: false,
+        Preto: false,
+        Rosa: false,
+        Vinho: false,
+    });
 
-/**useEffect (() => {
-}, []) */
-const [visb, setVisb] = useState(false)
-const [amarelo, setAmarelo] = useState(false);
-const [azul, setAzul] = useState(false);
-const [branco, setBranco] = useState(false);
-const [cinza, setCinza] = useState(false);
-const [laranja, setLaranja] = useState(false);
-const [verde, setVerde] = useState(false);
-const [vermelho, setVermelho] = useState(false);
-const [preto, setPreto] = useState(false);
-const [rosa, setRosa] = useState(false);
-const [vinho, setVinho] = useState(false);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/products');
+                const data: Product[] = await response.json();
+    
+                const filtered = data.filter((data) => {
+                    if (
+                        (select.Amarelo && data.color === "Amarelo")||
+                        (select.Azul && data.color === "Azul")||
+                        (select.Branco && data.color === "Branco")||
+                        (select.Cinza && data.color === "Cinza")||
+                        (select.Laranja && data.color === "Laranja")||
+                        (select.Verde && data.color === "Verde")||
+                        (select.Vermelho && data.color === "Vermelho")||
+                        (select.Preto && data.color === "Preto")||
+                        (select.Rosa && data.color === "Rosa")||
+                        (select.Vinho && data.color === "Vinho")
+                    ) {
+                        return true;
+                    }
+                    return false;
+                });
+    
+                setCorFiltrated(filtered);
+                onCorFilter(filtered);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchData();
+    }, [select]);
 
-const handleVisb = () => {
-    setVisb(!visb)
-}
+    const handleChange = (event: any) => {
+        const { name, checked } = event.target;
 
-return (
-    <div className="cores">
-        <Title name='Cores' />
-        <Checkbox
-            label='Amarelo'
-            name='cor1'
-            select={amarelo}
-            onChange={(event) => setAmarelo(event.target.checked)}
-        />
-        <Checkbox
-            label='Azul'
-            name='cor2'
-            select={azul}
-            onChange={(event) => setAzul(event.target.checked)}
-        />
-        <Checkbox
-            label='Branco'
-            name='cor3'
-            select={branco}
-            onChange={(event) => setBranco(event.target.checked)}
-        />
-        <Checkbox
-            label='Cinza'
-            name='cor4'
-            select={cinza}
-            onChange={(event) => setCinza(event.target.checked)}
-        />
-        <Checkbox
-            label='Laranja'
-            name='cor5'
-            select={laranja}
-            onChange={(event) => setLaranja(event.target.checked)}
-        />
-        {visb && (
-            <>
-                <Checkbox
-                    label='Verde'
-                    name='cor6'
-                    select={verde}
-                    onChange={(event) => setVerde(event.target.checked)}
-                />
+        setSelect((prevSelect) => ({
+            ...prevSelect,
+            [name]: checked,
+        }));
+        console.log({name, checked})
+    }
 
-                <Checkbox
-                    label='Vermelho'
-                    name='cor7'
-                    select={vermelho}
-                    onChange={(event) => setVermelho(event.target.checked)}
-                />
-                <Checkbox
-                    label='Preto'
-                    name='cor8'
-                    select={preto}
-                    onChange={(event) => setPreto(event.target.checked)}
-                />
-                <Checkbox
-                    label='Rosa'
-                    name='cor9'
-                    select={rosa}
-                    onChange={(event) => setRosa(event.target.checked)}
-                />
-                <Checkbox
-                    label='Vinho'
-                    name='cor10'
-                    select={vinho}
-                    onChange={(event) => setVinho(event.target.checked)}
-                />
-            </>
-        )}
-        {visb ? (
-            <div className='btn-filt' onClick={handleVisb}>
-                <span>Ver todas as cores</span><Icon icon="prime:angle-up" className='ibtn' />
-            </div>
-        ) : (
-            <div className='btn-filt' onClick={handleVisb}>
-                <span>Ver todas as cores</span><Icon icon="prime:angle-down" className='ibtn' />
-            </div>
+    const handleVisb = () => {
+        setVisb(!visb)
+    }
 
-        )}
-    </div>
-)
+    return (
+        <div className="cores">
+            <Title name='Cores' />
+            <Checkbox
+                label='Amarelo'
+                name='Amarelo'
+                value='Amarelo'
+                checked={select.Amarelo}
+                onChange={handleChange}
+            />
+            <Checkbox
+                label='Azul'
+                name='Azul'
+                value='Azul'
+                checked={select.Azul}
+                onChange={handleChange}
+            />
+            <Checkbox
+                label='Branco'
+                name='Branco'
+                value='Branco'
+                checked={select.Branco}
+                onChange={handleChange}
+            />
+            <Checkbox
+                label='Cinza'
+                name='Cinza'
+                value='Cinza'
+                checked={select.Cinza}
+                onChange={handleChange}
+            />
+            <Checkbox
+                label='Laranja'
+                name='Laranja'
+                value='Laranja'
+                checked={select.Laranja}
+                onChange={handleChange}
+            />
+            
+            {visb && (
+                <>
+                    <Checkbox
+                        label='Verde'
+                        name='Verde'
+                        value='Verde'
+                        checked={select.Verde}
+                        onChange={handleChange}
+                    />
+
+                    <Checkbox
+                        label='Vermelho'
+                        name='Vermelho'
+                        value='Vermelho'
+                        checked={select.Vermelho}
+                        onChange={handleChange}
+                    />
+                    <Checkbox
+                        label='Preto'
+                        name='Preto'
+                        value='Preto'
+                        checked={select.Preto}
+                        onChange={handleChange}
+                    />
+                    <Checkbox
+                        label='Rosa'
+                        name='Rosa'
+                        value='Rosa'
+                        checked={select.Rosa}
+                        onChange={handleChange}
+                    />
+                    <Checkbox
+                        label='Vinho'
+                        name='Vinho'
+                        value='Vinho'
+                        checked={select.Vinho}
+                        onChange={handleChange}
+                    />
+                </>
+            )}
+            {visb ? (
+                <div className='btn-filt' onClick={handleVisb}>
+                    <span>Ver todas as cores</span><Icon icon="prime:angle-up" className='ibtn' />
+                </div>
+            ) : (
+                <div className='btn-filt' onClick={handleVisb}>
+                    <span>Ver todas as cores</span><Icon icon="prime:angle-down" className='ibtn' />
+                </div>
+
+            )}
+        </div>
+    )
 }

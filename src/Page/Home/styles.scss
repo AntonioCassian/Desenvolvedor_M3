@@ -113,3 +113,11 @@
     }
     
 }
+
+@media (min-width: 376px) {
+    .fit-cont{
+        display: none;
+        opacity: 0;
+        overflow: hidden;
+    }
+}

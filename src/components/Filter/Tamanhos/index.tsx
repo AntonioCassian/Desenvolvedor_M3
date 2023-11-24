@@ -1,25 +1,13 @@
 import { useEffect, useState } from 'react'
-import { Checkbox } from '../CheckBox'
-import { Tamanho } from '../Tamanho'
-import { Title } from '../Title'
+import { Checkbox } from '../../CheckBox'
+import { Tamanho } from '../../Tamanho'
+import { Title } from '../../Title'
 import { Icon } from '@iconify/react';
 import './styles.scss'
-import { Cores } from './Cores';
-import { Precos } from './Precos';
-import { Product } from '../../provider/Product';
+import { Cores } from '../Cores';
+import { Precos } from '../Precos';
+import { Product } from '../../../provider/Product';
 
-export const cores = [
-    { "id": 1, "color": "Amarelo" },
-    { "id": 2, "color": "Azul" },
-    { "id": 3, "color": "Branco" },
-    { "id": 4, "color": "Cinza" },
-    { "id": 5, "color": "Laranja" },
-    { "id": 6, "color": "Verde" },
-    { "id": 7, "color": "Vermelho" },
-    { "id": 8, "color": "Preto" },
-    { "id": 9, "color": "Rosa" },
-    { "id": 10, "color": "Vinho" },
-]
 
 export const preco = [
 
@@ -30,7 +18,14 @@ export const preco = [
     'a partir de R$ 500'
 ]
 
+
 export const Filter = () => {
+    const [produtos, setProdutos] = useState<Product []>([])
+    const Filtrar = () => {
+        produtos.filter((produt) => produt.color)
+    }
+    console.log(Filtrar())
+
     return (
         <div className='filter'>
             <Cores />

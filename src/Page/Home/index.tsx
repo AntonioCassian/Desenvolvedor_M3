@@ -1,7 +1,7 @@
 import './styles.scss'
 import { useState, useEffect } from 'react';
 //import { Card } from "../../components/Card"
-import { Filter } from "../../components/Filter"
+//import { Filter } from "../../components/Filter"
 import { Header } from "../../components/Header"
 import { Order } from '../../components/Order'
 import { Button } from '../../components/Button'
@@ -9,6 +9,8 @@ import { Footer } from '../../components/Footer';
 import { Product } from '../../provider/Product';
 import { api } from '../../provider/api';
 import { Modal } from '../../components/Modal';
+import { Cores } from '../../components/Filter/Cores';
+
 
 export const Home = () => {
     const [visible, setVisible] = useState(9)
@@ -54,11 +56,13 @@ export const Home = () => {
         if(NewProd) setModal(false)
     }
 
+    
 
     const getData = async () => {
         await api.get(`/products`)
             .then((response) => {
                 setProdutos(response.data)
+                
             })
             .catch((err) => {
                 alert(err)
@@ -67,6 +71,12 @@ export const Home = () => {
     useEffect(() => {
         getData();
     }, []);
+
+   //Filtrando pela cor 
+    const handleFilter = (corFiltrated: Product[]) => {
+        setProdutos(corFiltrated)
+    }
+    
     return (
         <>
             <Header />
@@ -89,7 +99,7 @@ export const Home = () => {
                 </div>
                 <div className="home-div">
                     <aside>
-                        <Filter />
+                        <Cores onCorFilter={handleFilter} />
                     </aside>
                     <main>
                         <section className='main-container'>
