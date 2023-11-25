@@ -1,3 +1,4 @@
+@import '../../../styles/global.scss';
 .tm-f {
   margin-top: 40px;
   width: 169px;
@@ -58,4 +59,28 @@
     color: #000;
   }
   
+}
+
+@include mobile { 
+  .tamanho-filter {
+    margin-top: 20px;
+  }
+  .tit{
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+  }
+  .btn-filt {
+    display: none;
+  }
+}
+
+@media (min-width: 376px) {
+  .tit{
+      span{
+          display: none;
+          opacity: 0;
+          overflow: hidden;
+      }
+  }
 }

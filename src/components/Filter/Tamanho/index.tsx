@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Title } from '../../Title'
 import './styles.scss'
+import { Icon } from '@iconify/react';
 import { Product } from '../../../provider/Product';
 
-export const Tamanho = ({onSizeFilter}: any) => {
+export const Tamanho = ({ onSizeFilter }: any) => {
     const [tamanho, setTamanho] = useState<Product[]>([])
+    const [modal, setModal] = useState(false);
     const [select, setSelect] = useState<{ [key: string]: boolean }>({
         P: false,
         M: false,
@@ -15,6 +17,14 @@ export const Tamanho = ({onSizeFilter}: any) => {
         N38: false,
         N40: false
     });
+
+    const handleResize = () => {
+        if (window.innerWidth >= 375) {
+            setModal(true)
+        } else {
+            setModal(false)
+        }
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -39,13 +49,13 @@ export const Tamanho = ({onSizeFilter}: any) => {
                 });
 
                 setTamanho(filtered);
-                console.log(filtered)
                 onSizeFilter(filtered);
             } catch (error) {
                 console.error(error);
             }
         };
         fetchData();
+        handleResize();
     }, [select]);
 
     const handleChange = (event: any) => {
@@ -61,90 +71,94 @@ export const Tamanho = ({onSizeFilter}: any) => {
 
 
     return (
-        <div className='tm-f'>
-            <Title name='Tamanhos' />
-            <div className='tamanho-filter'>
-                <div className='tamanho'>
-                    <input
-                        type='checkbox'
-                        id='check'
-                        name='P'
-                        checked={select.P}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="check">P</label>
-                </div>
-                <div className='tamanho'>
-                    <input
-                        type='checkbox'
-                        id='checkM'
-                        name='M'
-                        checked={select.M}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="checkM">M</label>
-                </div>
-                <div className='tamanho'>
-                    <input
-                        type='checkbox'
-                        id='checkG'
-                        name='G'
-                        checked={select.G}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="checkG">G</label>
-                </div>
-                <div className='tamanho'>
-                    <input
-                        type='checkbox'
-                        id='checkGG'
-                        name='GG'
-                        checked={select.GG}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="checkGG">GG</label>
-                </div>
-                <div className='tamanho'>
-                    <input
-                        type='checkbox'
-                        id='checkU'
-                        name='U'
-                        checked={select.U}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="checkU">U</label>
-                </div>
-                <div className='tamanho'>
-                    <input
-                        type='checkbox'
-                        id='checknt'
-                        name='N36'
-                        checked={select.N36}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="checknt">36</label>
-                </div>
-                <div className='tamanho'>
-                    <input
-                        type='checkbox'
-                        id='checknh'
-                        name='N38'
-                        checked={select.N38}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="checknh">38</label>
-                </div>
-                <div className='tamanho'>
-                    <input
-                        type='checkbox'
-                        id='checknf'
-                        name='N40'
-                        checked={select.N40}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="checkf">40</label>
-                </div>
+        <div className=''>
+            <div className="tit">
+                <Title name='Tamanhos' />
+                <Icon icon="prime:angle-down" height={30} style={{ color: "#666" }} onClick={() => setModal(!modal)} />
             </div>
+            {modal &&
+                <div className='tamanho-filter tm-f'>
+                    <div className='tamanho'>
+                        <input
+                            type='checkbox'
+                            id='check'
+                            name='P'
+                            checked={select.P}
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="check">P</label>
+                    </div>
+                    <div className='tamanho'>
+                        <input
+                            type='checkbox'
+                            id='checkM'
+                            name='M'
+                            checked={select.M}
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="checkM">M</label>
+                    </div>
+                    <div className='tamanho'>
+                        <input
+                            type='checkbox'
+                            id='checkG'
+                            name='G'
+                            checked={select.G}
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="checkG">G</label>
+                    </div>
+                    <div className='tamanho'>
+                        <input
+                            type='checkbox'
+                            id='checkGG'
+                            name='GG'
+                            checked={select.GG}
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="checkGG">GG</label>
+                    </div>
+                    <div className='tamanho'>
+                        <input
+                            type='checkbox'
+                            id='checkU'
+                            name='U'
+                            checked={select.U}
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="checkU">U</label>
+                    </div>
+                    <div className='tamanho'>
+                        <input
+                            type='checkbox'
+                            id='checknt'
+                            name='N36'
+                            checked={select.N36}
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="checknt">36</label>
+                    </div>
+                    <div className='tamanho'>
+                        <input
+                            type='checkbox'
+                            id='checknh'
+                            name='N38'
+                            checked={select.N38}
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="checknh">38</label>
+                    </div>
+                    <div className='tamanho'>
+                        <input
+                            type='checkbox'
+                            id='checknf'
+                            name='N40'
+                            checked={select.N40}
+                            onChange={handleChange}
+                        />
+                        <label htmlFor="checkf">40</label>
+                    </div>
+                </div>}
         </div>
     )
 }

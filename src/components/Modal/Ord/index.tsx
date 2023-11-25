@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import './styles.scss';
 import { Icon } from '@iconify/react/dist/iconify.js';
+import { Cores } from '../../Filter/Cores';
+import { Tamanho } from '../../Filter/Tamanho';
+import { Precos } from '../../Filter/Precos';
 
 type Props = {
     recent: () => void;
@@ -8,10 +11,10 @@ type Props = {
     precomaior: () => void;
 }
 
-export const Modal = ({ recent, precomenor, precomaior }: Props) => {
+export const Ord = ({ recent, precomenor, precomaior }: Props) => {
     const [close, setClose] = useState(true)
     const handleClose = () => {
-        return setClose(!close) 
+        return setClose(!close)
     }
     return (
         <>

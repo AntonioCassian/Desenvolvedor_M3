@@ -1,25 +1,32 @@
 import './styles.scss'
 import { useState, useEffect } from 'react';
-//import { Card } from "../../components/Card"
-//import { Filter } from "../../components/Filter"
 import { Header } from "../../components/Header"
 import { Order } from '../../components/Order'
 import { Button } from '../../components/Button'
 import { Footer } from '../../components/Footer';
 import { Product } from '../../provider/Product';
 import { api } from '../../provider/api';
-import { Modal } from '../../components/Modal';
+
+import { Filter } from '../../components/Modal/Filter';
 import { Cores } from '../../components/Filter/Cores';
 import { Tamanho } from '../../components/Filter/Tamanho';
 import { Precos } from '../../components/Filter/Precos';
+import { Ord } from '../../components/Modal/Ord';
 
 
 export const Home = () => {
     const [visible, setVisible] = useState(9)
-    const [modal, setModal] = useState(false);
+    const [modalFil, setModalFil] = useState(false);
+    const [modalOrd, setModalOrd] = useState(false);
     const [produtos, setProdutos] = useState<Product[]>([])
     const [filt, setFilt] = useState<Product[]>([])
     const [count, setCount] = useState(0)
+    const [ord, setOrd] = useState(false)
+
+    const handlerOrd = () => {
+        setModalOrd(!modalOrd)
+        setOrd(!ord)
+    }
 
     const handleCarrinho = () => {
         setCount(count + 1)
@@ -39,7 +46,7 @@ export const Home = () => {
         }
         );
         setProdutos(NewProd);
-        if (NewProd) setModal(false)
+        if (NewProd) setModalOrd(false)
 
 
     }
@@ -51,7 +58,7 @@ export const Home = () => {
         }
         );
         setProdutos(NewProd);
-        if (NewProd) setModal(false)
+        if (NewProd) setModalOrd(false)
 
     }
 
@@ -62,7 +69,7 @@ export const Home = () => {
         }
         );
         setProdutos(NewProd);
-        if (NewProd) setModal(false)
+        if (NewProd) setModalOrd(false)
     }
 
     const getData = async () => {
@@ -80,11 +87,8 @@ export const Home = () => {
     }, []);
 
     //Filtrando pela cor 
-    const handleFilter = (corFiltrated: Product[], sizFiltrated: Product[]) => {
+    const handleFilter = (corFiltrated: Product[], ) => {
         setFilt(corFiltrated)
-        if(corFiltrated) {
-            setFilt([...sizFiltrated])
-        }
     }
 
     //Filtrando pelo tamanho
@@ -101,11 +105,17 @@ export const Home = () => {
         <>
             <Header count={count}/>
             <div className="container">
-                {modal &&
-                    <Modal
+                {modalOrd &&
+                    <Ord
                         recent={handleRecent}
                         precomenor={handleMenorPreco}
-                        precomaior={handleMaiorPreco} />
+                        precomaior={handleMaiorPreco} 
+                        ord={handlerOrd}
+                        />
+                }
+                
+                {modalFil &&
+                    <Filter />
                 }
                 <Order
                     recent={handleRecent}
@@ -113,9 +123,9 @@ export const Home = () => {
                     precomaior={handleMaiorPreco}
                 />
                 <div className='fit-cont'>
-                    <div className='ft-ct'>Filtrar</div>
+                    <div className='ft-ct' onClick={() => setModalFil(!modalFil)}>Filtrar</div>
                     <div className="vrt"></div>
-                    <div className='ft-ct' onClick={() => setModal(!modal)}>Ordenar</div>
+                    <div className='ft-ct' onClick={() => setModalOrd(!modalOrd)}>Ordenar</div>
                 </div>
                 <div className="home-div">
                     <aside>
@@ -144,35 +154,34 @@ export const Home = () => {
                                     </div>
                                 ))}
                             </section>
-                                <div className='main-btn'>
-                                    {visible < 14 ? (
-                                        <Button text="Carregar Mais" onClick={carregaMais} />
-                                    ) : (
-                                        <Button text="Carregar Menos" onClick={carregaMenos} />
-                                    )}
-                                </div>
+                                
                             </>
                         ) : (
-                            <section className='main-container'>
-                                {produtos.slice(0, visible).map((data) => (
-                                    <div className="card" key={data.id}>
-                                        <div className="card-img">
-                                            <img src={data.image} />
-                                        </div>
-                                        <div className="description">
-                                            <p className="name">{data.name}</p>
-
-                                            <div className="valor">
-                                                <p className="value">R$ {data.price.toFixed(2).replace('.',',')}</p>
-                                                <span className="parcela">até {data.parcelamento[0]} de R${data.parcelamento[1].toFixed(2).replace('.',',')}</span>
+                            <><section className='main-container'>
+                                    {produtos.slice(0, visible).map((data) => (
+                                        <div className="card" key={data.id}>
+                                            <div className="card-img">
+                                                <img src={data.image} />
                                             </div>
-                                        </div>
-                                        <button className="btn" onClick={handleCarrinho} id={data.id}>comprar</button>
-                                    </div >
-                                ))
-                                }
+                                            <div className="description">
+                                                <p className="name">{data.name}</p>
 
-                            </section >
+                                                <div className="valor">
+                                                    <p className="value">R$ {data.price.toFixed(2).replace('.', ',')}</p>
+                                                    <span className="parcela">até {data.parcelamento[0]} de R${data.parcelamento[1].toFixed(2).replace('.', ',')}</span>
+                                                </div>
+                                            </div>
+                                            <button className="btn" onClick={handleCarrinho} id={data.id}>comprar</button>
+                                        </div>
+                                    ))}
+
+                                </section><div className='main-btn'>
+                                        {visible < 14 ? (
+                                            <Button text="Carregar Mais" onClick={carregaMais} />
+                                        ) : (
+                                            <Button text="Carregar Menos" onClick={carregaMenos} />
+                                        )}
+                                    </div></>
                         )
                         }
                     </main>
