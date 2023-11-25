@@ -130,8 +130,8 @@ export const Home = () => {
                                             <p className="name">{data.name}</p>
 
                                             <div className="valor">
-                                                <p className="value">R$ {data.price}</p>
-                                                <span className="parcela">até {data.parcelamento[0]} de R${data.parcelamento[1]}</span>
+                                                <p className="value">R$ {data.price.toFixed(2).replace('.',',')}</p>
+                                                <span className="parcela">até {data.parcelamento[0]} de R${data.parcelamento[1].toFixed(2).replace('.',',')}</span>
                                             </div>
                                         </div>
                                         <button className="btn">comprar</button>
@@ -157,8 +157,8 @@ export const Home = () => {
                                             <p className="name">{data.name}</p>
 
                                             <div className="valor">
-                                                <p className="value">R$ {data.price}</p>
-                                                <span className="parcela">até {data.parcelamento[0]} de R${data.parcelamento[1]}</span>
+                                                <p className="value">R$ {data.price.toFixed(2).replace('.',',')}</p>
+                                                <span className="parcela">até {data.parcelamento[0]} de R${data.parcelamento[1].toFixed(2).replace('.',',')}</span>
                                             </div>
                                         </div>
                                         <button className="btn">comprar</button>
