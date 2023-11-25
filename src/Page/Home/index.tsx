@@ -11,6 +11,7 @@ import { api } from '../../provider/api';
 import { Modal } from '../../components/Modal';
 import { Cores } from '../../components/Filter/Cores';
 import { Tamanho } from '../../components/Filter/Tamanho';
+import { Precos } from '../../components/Filter/Precos';
 
 
 export const Home = () => {
@@ -18,6 +19,7 @@ export const Home = () => {
     const [modal, setModal] = useState(false);
     const [produtos, setProdutos] = useState<Product[]>([])
     const [filt, setFilt] = useState<Product[]>([])
+
     const carregaMais = () => {
         setVisible(visible + 3)
     }
@@ -58,8 +60,6 @@ export const Home = () => {
         if (NewProd) setModal(false)
     }
 
-
-
     const getData = async () => {
         await api.get(`/products`)
             .then((response) => {
@@ -75,14 +75,21 @@ export const Home = () => {
     }, []);
 
     //Filtrando pela cor 
-    const handleFilter = (corFiltrated: Product[]) => {
+    const handleFilter = (corFiltrated: Product[], sizFiltrated: Product[]) => {
         setFilt(corFiltrated)
+        if(corFiltrated) {
+            setFilt([...sizFiltrated])
+        }
     }
 
     //Filtrando pelo tamanho
-    const handleSiz = (sizFiltrated: Product[], corFiltrated: Product[]) => {
+    const handleSiz = (sizFiltrated: Product[]) => {
+        setFilt(sizFiltrated)
+    }
 
-        console.log(filt)
+    //Filtrando pelo preço
+    const handlePrice = (priceFilter: Product[]) => {
+        setFilt(priceFilter)
     }
 
     return (
@@ -109,11 +116,39 @@ export const Home = () => {
                     <aside>
                         <Cores onCorFilter={handleFilter} />
                         <Tamanho onSizeFilter={handleSiz} />
+                        <Precos onPrice={handlePrice} />
                     </aside>
                     <main>
-                        <section className='main-container'>
-                            {filt ?
-                                (produtos.slice(0, visible).map((data) => (
+                        {filt.length > 0 ? (
+                            <><section className='main-container'>
+                                {filt.map((data) => (
+                                    <div className="card" key={data.id}>
+                                        <div className="card-img">
+                                            <img src={data.image} />
+                                        </div>
+                                        <div className="description">
+                                            <p className="name">{data.name}</p>
+
+                                            <div className="valor">
+                                                <p className="value">R$ {data.price}</p>
+                                                <span className="parcela">até {data.parcelamento[0]} de R${data.parcelamento[1]}</span>
+                                            </div>
+                                        </div>
+                                        <button className="btn">comprar</button>
+                                    </div>
+                                ))}
+                            </section>
+                                <div className='main-btn'>
+                                    {visible < 14 ? (
+                                        <Button text="Carregar Mais" onClick={carregaMais} />
+                                    ) : (
+                                        <Button text="Carregar Menos" onClick={carregaMenos} />
+                                    )}
+                                </div>
+                            </>
+                        ) : (
+                            <section className='main-container'>
+                                {produtos.slice(0, visible).map((data) => (
                                     <div className="card" key={data.id}>
                                         <div className="card-img">
                                             <img src={data.image} />
@@ -128,34 +163,12 @@ export const Home = () => {
                                         </div>
                                         <button className="btn">comprar</button>
                                     </div >
-                                ))) :
+                                ))
+                                }
 
-                                (filt.map((data) => (
-                                    <div className="card" key={data.id}>
-                                        <div className="card-img">
-                                            <img src={data.image} />
-                                        </div>
-                                        <div className="description">
-                                            <p className="name">{data.name}</p>
-
-                                            <div className="valor">
-                                                <p className="value">R$ {data.price}</p>
-                                                <span className="parcela">até {data.parcelamento[0]} de R${data.parcelamento[1]}</span>
-                                            </div>
-                                        </div>
-                                        <button className="btn">comprar</button>
-
-                                    </div >
-                                )))
-                            }
-                        </section >
-                        <div className='main-btn'>
-                            {visible < 14 ? (
-                                <Button text="Carregar Mais" onClick={carregaMais} />
-                            ) : (
-                                <Button text="Carregar Menos" onClick={carregaMenos} />
-                            )}
-                        </div>
+                            </section >
+                        )
+                        }
                     </main>
                 </div>
             </div>

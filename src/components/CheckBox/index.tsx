@@ -2,7 +2,7 @@ import './styles.scss'
 
 type Props = {
     label?: string;
-    value: string;
+    value?: string;
     checked?: boolean;
     name: string;
     onChange: (event: any) => void;
