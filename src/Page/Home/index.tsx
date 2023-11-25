@@ -19,6 +19,11 @@ export const Home = () => {
     const [modal, setModal] = useState(false);
     const [produtos, setProdutos] = useState<Product[]>([])
     const [filt, setFilt] = useState<Product[]>([])
+    const [count, setCount] = useState(0)
+
+    const handleCarrinho = () => {
+        setCount(count + 1)
+    }
 
     const carregaMais = () => {
         setVisible(visible + 3)
@@ -94,7 +99,7 @@ export const Home = () => {
 
     return (
         <>
-            <Header />
+            <Header count={count}/>
             <div className="container">
                 {modal &&
                     <Modal
@@ -120,7 +125,8 @@ export const Home = () => {
                     </aside>
                     <main>
                         {filt.length > 0 ? (
-                            <><section className='main-container'>
+                            <>
+                            <section className='main-container'>
                                 {filt.map((data) => (
                                     <div className="card" key={data.id}>
                                         <div className="card-img">
@@ -134,7 +140,7 @@ export const Home = () => {
                                                 <span className="parcela">até {data.parcelamento[0]} de R${data.parcelamento[1].toFixed(2).replace('.',',')}</span>
                                             </div>
                                         </div>
-                                        <button className="btn">comprar</button>
+                                        <button className="btn" onClick={handleCarrinho}>comprar</button>
                                     </div>
                                 ))}
                             </section>
@@ -161,7 +167,7 @@ export const Home = () => {
                                                 <span className="parcela">até {data.parcelamento[0]} de R${data.parcelamento[1].toFixed(2).replace('.',',')}</span>
                                             </div>
                                         </div>
-                                        <button className="btn">comprar</button>
+                                        <button className="btn" onClick={handleCarrinho} id={data.id}>comprar</button>
                                     </div >
                                 ))
                                 }
