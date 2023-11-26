@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import './styles.scss';
 import { Icon } from '@iconify/react/dist/iconify.js';
-import { Cores } from '../../Filter/Cores';
-import { Tamanho } from '../../Filter/Tamanho';
-import { Precos } from '../../Filter/Precos';
+import { FilterAside } from '../../Filter';
 
 export const Filter = () => {
     const [close, setClose] = useState(true)
@@ -20,14 +18,12 @@ export const Filter = () => {
                             <Icon icon="material-symbols:close" className='clos' onClick={handleClose} />
                         </div>
                     </div>
-                    <ul className="list-ord">
-                        <li className='it-ord'><Cores /></li>
-                        <li className="it-ord"><Tamanho /></li>
-                        <li className="it-ord"><Precos /></li>
-                    </ul>
+                    <div className="list-ord">
+                    <FilterAside  />
                     <div className='bts'>
                         <button className='btn1'>Aplicar</button>
-                        <button className='btn2'>Limpar</button>
+                        <button className='btn1 btn2'>Limpar</button>
+                    </div>
                     </div>
                 </div>
 

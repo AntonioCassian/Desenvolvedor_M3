@@ -33,8 +33,13 @@ div {
     margin: auto 162px;
 
     @include mobile {
-
         margin: auto 16px;
+    }
+}
 
+@media (max-width: 624px) {
+    .container{
+
+            margin: auto 20px;
     }
 }

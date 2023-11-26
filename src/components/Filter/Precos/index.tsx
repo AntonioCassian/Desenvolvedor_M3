@@ -12,15 +12,10 @@ export const Precos = ({ onPrice }: any) => {
     const [modal, setModal] = useState(false);
     const [select, setSelect] = useState<{ [key: string]: boolean }>({
         opt1: false,
-        Azul: false,
-        Branco: false,
-        Cinza: false,
-        Laranja: false,
-        Verde: false,
-        Vermelho: false,
-        Preto: false,
-        Rosa: false,
-        Vinho: false,
+        opt2: false,
+        opt3: false,
+        opt4: false,
+        opt5: false
     });
 
     const handleResize = () => {

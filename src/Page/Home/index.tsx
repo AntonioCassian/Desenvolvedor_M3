@@ -6,12 +6,9 @@ import { Button } from '../../components/Button'
 import { Footer } from '../../components/Footer';
 import { Product } from '../../provider/Product';
 import { api } from '../../provider/api';
-
 import { Filter } from '../../components/Modal/Filter';
-import { Cores } from '../../components/Filter/Cores';
-import { Tamanho } from '../../components/Filter/Tamanho';
-import { Precos } from '../../components/Filter/Precos';
 import { Ord } from '../../components/Modal/Ord';
+import { FilterAside } from '../../components/Filter';
 
 
 export const Home = () => {
@@ -21,12 +18,7 @@ export const Home = () => {
     const [produtos, setProdutos] = useState<Product[]>([])
     const [filt, setFilt] = useState<Product[]>([])
     const [count, setCount] = useState(0)
-    const [ord, setOrd] = useState(false)
 
-    const handlerOrd = () => {
-        setModalOrd(!modalOrd)
-        setOrd(!ord)
-    }
 
     const handleCarrinho = () => {
         setCount(count + 1)
@@ -86,37 +78,27 @@ export const Home = () => {
         getData();
     }, []);
 
-    //Filtrando pela cor 
-    const handleFilter = (corFiltrated: Product[], ) => {
-        setFilt(corFiltrated)
-    }
-
-    //Filtrando pelo tamanho
-    const handleSiz = (sizFiltrated: Product[]) => {
-        setFilt(sizFiltrated)
-    }
-
-    //Filtrando pelo preço
-    const handlePrice = (priceFilter: Product[]) => {
-        setFilt(priceFilter)
-    }
+    const handleFilter = (corFiltrated: Product[]) => {
+        setFilt(corFiltrated);
+    };
+        
 
     return (
         <>
-            <Header count={count}/>
+            <Header count={count} />
             <div className="container">
                 {modalOrd &&
                     <Ord
                         recent={handleRecent}
                         precomenor={handleMenorPreco}
-                        precomaior={handleMaiorPreco} 
-                        ord={handlerOrd}
-                        />
+                        precomaior={handleMaiorPreco}
+                    />
                 }
-                
+
                 {modalFil &&
                     <Filter />
                 }
+                
                 <Order
                     recent={handleRecent}
                     precomenor={handleMenorPreco}
@@ -129,36 +111,13 @@ export const Home = () => {
                 </div>
                 <div className="home-div">
                     <aside>
-                        <Cores onCorFilter={handleFilter} />
-                        <Tamanho onSizeFilter={handleSiz} />
-                        <Precos onPrice={handlePrice} />
+                        <FilterAside onFilter={handleFilter} />
                     </aside>
                     <main>
                         {filt.length > 0 ? (
                             <>
-                            <section className='main-container'>
-                                {filt.map((data) => (
-                                    <div className="card" key={data.id}>
-                                        <div className="card-img">
-                                            <img src={data.image} />
-                                        </div>
-                                        <div className="description">
-                                            <p className="name">{data.name}</p>
-
-                                            <div className="valor">
-                                                <p className="value">R$ {data.price.toFixed(2).replace('.',',')}</p>
-                                                <span className="parcela">até {data.parcelamento[0]} de R${data.parcelamento[1].toFixed(2).replace('.',',')}</span>
-                                            </div>
-                                        </div>
-                                        <button className="btn" onClick={handleCarrinho}>comprar</button>
-                                    </div>
-                                ))}
-                            </section>
-                                
-                            </>
-                        ) : (
-                            <><section className='main-container'>
-                                    {produtos.slice(0, visible).map((data) => (
+                                <section className='main-container'>
+                                    {filt.map((data) => (
                                         <div className="card" key={data.id}>
                                             <div className="card-img">
                                                 <img src={data.image} />
@@ -171,17 +130,40 @@ export const Home = () => {
                                                     <span className="parcela">até {data.parcelamento[0]} de R${data.parcelamento[1].toFixed(2).replace('.', ',')}</span>
                                                 </div>
                                             </div>
-                                            <button className="btn" onClick={handleCarrinho} id={data.id}>comprar</button>
+                                            <button className="btn" onClick={handleCarrinho}>comprar</button>
                                         </div>
                                     ))}
+                                </section>
 
-                                </section><div className='main-btn'>
-                                        {visible < 14 ? (
-                                            <Button text="Carregar Mais" onClick={carregaMais} />
-                                        ) : (
-                                            <Button text="Carregar Menos" onClick={carregaMenos} />
-                                        )}
-                                    </div></>
+                            </>
+                        ) : (
+                            <><section className='main-container'>
+                                {produtos.slice(0, visible).map((data) => (
+                                    <div className="card" key={data.id}>
+                                        <div className="card-img">
+                                            <img src={data.image} />
+                                        </div>
+                                        <div className="description">
+                                            <p className="name">{data.name}</p>
+
+                                            <div className="valor">
+                                                <p className="value">R$ {data.price.toFixed(2).replace('.', ',')}</p>
+                                                <span className="parcela">até {data.parcelamento[0]} de R${data.parcelamento[1].toFixed(2).replace('.', ',')}</span>
+                                            </div>
+                                        </div>
+                                        <button className="btn" onClick={handleCarrinho} id={data.id}>comprar</button>
+                                    </div>
+                                ))}
+
+                            </section>
+                            <div className='main-btn'>
+                                    {visible < 14 ? (
+                                        <Button text="Carregar Mais" onClick={carregaMais} />
+                                    ) : (
+                                        <Button text="Carregar Menos" onClick={carregaMenos} />
+                                    )}
+                            </div>
+                            </>
                         )
                         }
                     </main>

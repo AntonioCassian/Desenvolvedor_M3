@@ -32,12 +32,19 @@
 
     }
 
-    .it-ord {
+    .list-ord {
         margin: 30px 16px;
     }
 
+    .bts {
+        display: flex;
+        gap: 23px;
+        width: auto;
+        justify-content: space-evenly;
+        margin-top: 30px;
+    }
+
     .btn1 {
-        width: 49%;
         border: none;
         background: var(--blue);
         padding: 30px;
@@ -45,5 +52,12 @@
         background: var(--blue);
         padding: 8px;
         color: #fff;
+        width: 50%;
+    }
+
+    .btn2 {
+        border: 1px solid var(--gray-200);
+        color: var(--gray-200);
+        background: none;
     }
 }
