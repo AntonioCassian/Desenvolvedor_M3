@@ -81,7 +81,7 @@ export const Home = () => {
     const handleFilter = (corFiltrated: Product[]) => {
         setFilt(corFiltrated);
     };
-        
+
 
     return (
         <>
@@ -98,7 +98,7 @@ export const Home = () => {
                 {modalFil &&
                     <Filter />
                 }
-                
+
                 <Order
                     recent={handleRecent}
                     precomenor={handleMenorPreco}
@@ -156,13 +156,15 @@ export const Home = () => {
                                 ))}
 
                             </section>
-                            <div className='main-btn'>
-                                    {visible < 14 ? (
-                                        <Button text="Carregar Mais" onClick={carregaMais} />
-                                    ) : (
-                                        <Button text="Carregar Menos" onClick={carregaMenos} />
-                                    )}
-                            </div>
+                                {produtos.length > 0 &&
+                                    <div className='main-btn'>
+                                        {visible < 14 ? (
+                                            <Button text="Carregar Mais" onClick={carregaMais} />
+                                        ) : (
+                                            <Button text="Carregar Menos" onClick={carregaMenos} />
+                                        )}
+                                    </div>
+                                }
                             </>
                         )
                         }
