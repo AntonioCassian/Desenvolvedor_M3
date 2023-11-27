@@ -1,5 +1,9 @@
 @import 'reset';
 
+body{ 
+height: 100vh;
+}
+
 :root {
     --black: #000000;
     --gray-100: rgba(0, 0, 0, 0.5);
