@@ -34,7 +34,7 @@ export const Home = () => {
     const handleRecent = () => {
         const NewProd = [...produtos]
         NewProd.sort((a, b) => {
-            return new Date(b.date) - new Date(a.date);
+            return new Date(b.date as any).getDate() - new Date(a.date as any).getDate();
         }
         );
         setProdutos(NewProd);

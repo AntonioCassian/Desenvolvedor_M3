@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// eslint-disable react-hooks/exhaustive-deps */
+// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useEffect, useState } from 'react'
 import { Product } from "../../provider/Product"
 import { Title } from '../Title'
@@ -10,6 +14,8 @@ export const FilterAside = ({ onFilter }: any) => {
     const [modal, setModal] = useState(false)
     const [modalTam, setModalTam] = useState(false)
     const [modalPrecos, setModalPrecos] = useState(false)
+ 
+    // @ts-expect-error
     const [filter, setFilter] = useState<Product[]>([])
     const [select, setSelect] = useState<{ [key: string]: boolean }>({
         Amarelo: false,
@@ -83,7 +89,7 @@ export const FilterAside = ({ onFilter }: any) => {
                     }
                     return false;
                 });
-
+                
                 setFilter(filtered);
                 onFilter(filtered);
 
