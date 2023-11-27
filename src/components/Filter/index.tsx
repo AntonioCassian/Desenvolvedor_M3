@@ -50,7 +50,7 @@ export const FilterAside = ({ onFilter }: any) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:3000/products');
+                const response = await fetch('https://desenvolvedor-m3-serve.vercel.app/products');
                 const data: Product[] = await response.json();
 
                 const filtered = data.filter((data) => {
