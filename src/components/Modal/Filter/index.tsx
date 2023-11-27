@@ -21,8 +21,8 @@ export const Filter = () => {
                     <div className="list-ord">
                     <FilterAside  />
                     <div className='bts'>
-                        <button className='btn1'>Aplicar</button>
-                        <button className='btn1 btn2'>Limpar</button>
+                        <button className='btn1' onClick={() => alert('Não funciona 😢')}>Aplicar</button>
+                        <button className='btn1 btn2' onClick={() => alert('Não funciona 😢')}>Limpar</button>
                     </div>
                     </div>
                 </div>

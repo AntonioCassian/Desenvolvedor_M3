@@ -8,6 +8,8 @@ import './styles.scss'
 export const FilterAside = ({ onFilter }: any) => {
     const [visb, setVisb] = useState(false)
     const [modal, setModal] = useState(false)
+    const [modalTam, setModalTam] = useState(false)
+    const [modalPrecos, setModalPrecos] = useState(false)
     const [filter, setFilter] = useState<Product[]>([])
     const [select, setSelect] = useState<{ [key: string]: boolean }>({
         Amarelo: false,
@@ -211,9 +213,9 @@ export const FilterAside = ({ onFilter }: any) => {
             <div className='tam'>
                 <div className="tit">
                     <Title name='Tamanhos' />
-                    <Icon icon="prime:angle-down" height={30} style={{ color: "#666" }} onClick={() => setModal(!modal)} />
+                    <Icon icon="prime:angle-down" height={30} style={{ color: "#666" }} onClick={() => setModalTam(!modalTam)} />
                 </div>
-                {modal &&
+                {modalTam &&
                     <div className='tamanho-filter tm-f'>
                         <div className='tamanho'>
                             <input
@@ -301,9 +303,9 @@ export const FilterAside = ({ onFilter }: any) => {
             <div className="precos">
                 <div className="tit">
                     <Title name='Faixa de Preço' />
-                    <Icon icon="prime:angle-down" height={30} style={{ color: "#666" }} onClick={() => setModal(!modal)} />
+                    <Icon icon="prime:angle-down" height={30} style={{ color: "#666" }} onClick={() => setModalPrecos(!modalPrecos)} />
                 </div>
-                {modal &&
+                {modalPrecos &&
                     <>
                         <Checkbox
                             label='de R$0 até R$50'
