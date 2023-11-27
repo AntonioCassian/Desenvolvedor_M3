@@ -1,30 +1,39 @@
-# React + TypeScript + Vite
+# Desenvolvedor_M3
+### Breve Descrição
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O projeto por sua vez foi um pouco complicado, mas no fim das dúvidas consegui terminar-lo,
+Afinal foi um desafio novo mas com diversas possibilidades de adquirir mais conhecimento no front-end e de aprender mais.
 
-Currently, two official plugins are available:
+Escolhi o React.tsx como a linguagem principal não e pra o css utilizei o SCSS(sass) como estava escrito na descrição do projeto.
+Eu estava tentando separar a filtragem em três componentes diferentes e depois juntar os resultados para renderizar na tela,
+mas não consegui devido ao tempo corrido, minha solução foi envolver todos os checkbox em um único componente porém deu certo.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Instalei o axios como dependência usei ele na para fazer os cartões,
+e nenhum filtro estou usando o fetch por conta que api.get() não estava renderizando.
+na filtragem responsiva não conclui por conta do tempo, mas consegui fazer a resposavidade!
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Estruturas
+** Reaja vite **
+** Digite script **
+** Atrevido **
+** servidor json **
 
-- Configure the top-level `parserOptions` property like this:
+## Comandos
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+` npm install ` - instala as dependências do código.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+` npm run dev ` - inicia o projeto.
+
+## 
+-- implantar o json-server:
+https://desenvolvedor-m3-serve.vercel.app/products
+
+--deploy da aplicação:
+https://desenvolvedor-m3-dusky.vercel.app/
+''As fotos não pegaram por que não gerou nem um link e sim estão vindo do projeto normal.''
+Então o mais indicado é fazer um git clone.
+
+##
+#### E-mail:
+antoniomart849@gmail.com
